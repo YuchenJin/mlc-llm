@@ -146,6 +146,7 @@ pub struct GenerationConfig {
     /// The temperature applied to logits before sampling. The default value is
     /// `0.7`. A higher temperature encourages more diverse outputs, while a
     /// lower temperature produces more deterministic outputs.
+    #[serde(skip_serializing_if = "Option::is_none")]
     temperature: Option<f32>,
 
     /// The repetition penalty controls the likelihood of the model generating
@@ -158,6 +159,7 @@ pub struct GenerationConfig {
 
     /// For more details on how repetition penalty controls text generation, please
     /// check out the CTRL paper <https://arxiv.org/pdf/1909.05858.pdf>.
+    #[serde(skip_serializing_if = "Option::is_none")]
     repetition_penalty: Option<f32>,
 
     /// This parameter determines the set of tokens from which we sample during
@@ -167,37 +169,44 @@ pub struct GenerationConfig {
 
     /// For additional information on top-p sampling, please refer to this blog
     /// post: <https://huggingface.co/blog/how-to-generate#top-p-nucleus-sampling>.
+    #[serde(skip_serializing_if = "Option::is_none")]
     top_p: Option<f32>,
 
     /// The approximated average number of generated tokens in each round. Used
     /// to determine whether the maximum window size would be exceeded.
+    #[serde(skip_serializing_if = "Option::is_none")]
     mean_gen_len: Option<usize>,
 
     /// This parameter determines the maximum length of the generated text. If it is
     /// not set, the model will generate text until it encounters a stop token.
+    #[serde(skip_serializing_if = "Option::is_none")]
     max_gen_len: Option<usize>,
 
     /// Number between `-2.0` and `2.0`. Positive values penalize new tokens based on
     /// whether they appear in the text so far, increasing the model's likelihood
     /// to talk about new topics. Negative values can increase the likelihood of
     /// repetition.
+    #[serde(skip_serializing_if = "Option::is_none")]
     presence_penalty: Option<f32>,
 
     /// Number between `-2.0` and `2.0`. Positive values penalize new tokens based on their
     /// existing frequency in the text so far, decreasing the model's likelihood to
     /// repeat the same line verbatim. Negative values can increase the likelihood of
     /// repetition.
+    #[serde(skip_serializing_if = "Option::is_none")]
     frequency_penalty: Option<f32>,
 
     /// This parameter determines the number of text samples to generate. The default
     /// value is `1`. Note that this parameter is only used when `stream` is set to
     /// `false`.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub n: Option<usize>,
 
     /// When `stop` is encountered, the model will stop generating output.
     /// It can be a string or a list of strings. If it is a list of strings, the model
     /// will stop generating output when any of the strings in the list is encountered.
     /// Note that this parameter does not override the default stop string of the model.
+    #[serde(skip_serializing_if = "Option::is_none")]
     stop: Option<Vec<String>>,
 }
 
